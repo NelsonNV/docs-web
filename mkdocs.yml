@@ -1,0 +1,11 @@
+site_name: Documentacion Personal
+
+nav:
+  - Inicio: 'index.md'
+  - Generar Documentacion Web: 'mkdocs.md'
+  - Linux: 'linux.md'
+  - Git : 'git.md'
+  - Herramientas: 'Heramientas.md'
+  - Instalar Qtile: 'qtile.md'
+  - Base De Datos: 'basedatos.md'
+theme: readthedocs

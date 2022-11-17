@@ -1,0 +1,3 @@
+# ignora documentacion creada mkdocs
+/site 
+.vscode/
