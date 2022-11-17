@@ -28,13 +28,23 @@ estos datos lo podemos sacar con un escaneo muy espesifico
 
 Se puede utilizar en algunos escaneo el dominio pero no siempre podremos sacar todos los datos como por ejemplo el escaneo de la SO.
 
+hay funciones dentro del nmap como la busqueda de vugneravilidades y fuerza bruta.
+todo esto en base a [script](https://nmap.org/book/nse-usage.html) ya existentes tenemps mucha informacion de esos script en la pagina oficial.
+
 ## Hackear una red wifi
 
 usaremos la herramienta ``wifite``
+### que es lo que hace wifite
 
-esta herramienta necesita que instales algunos programas te lo menciona al inicio
+wifite intenta sumprantar la red original para asi capturar la el hash de los paquetes enviados de esta forma solo quedaria desepcriptar la contraseña.
 
-es necesario tener una tarjeta de red que pueda entrar en modo escaneo.
+en palabras simple. campturamos la contraseña que esta encriptada. para despues desencriptarla.
+
+Pero este metodo utiliza el hecho de que existe un dispositivo que intentara conectarse.
+### como usarla
+
+- esta herramienta necesita que instales algunos programas te lo menciona al inicio
+- es necesario tener una tarjeta de red que pueda entrar en modo escaneo.
 
 al ejecutar el ``wifite`` como root.
 
@@ -45,14 +55,14 @@ precinaremos el ``ctrl + C`` para detener el proceso de escaneo, y le escribimos
 **re cordar que pregunta por el ultimo escaneo que se hizo**
 
 al seleccionarla generara una prueba de captura de hash
+con esto probara si la contraseña es posibre desifrarla, con su base de dato portable.
 
-### que es lo que hace wifite
+en caso de que funcione su desifrado generara un archivo json con la contraseña y una carpeta ``hs`` que contendra el hash de la red wifi
 
-wifite intenta sumprantar la red original para asi capturar la el hash de los paquetes enviados de esta forma solo quedaria desepcriptar la contraseña.
+pero en caso de que no te funcione tendras que decifrar la contraseña con herramientas de cifrado
+### fuente
 
-en palabras simple. campturamos la contraseña que esta encriptada. para despues desencriptarla.
-
-Pero este metodo utiliza el hecho de que existe un dispositivo que intentara conectarse.
+todo esto fue basado en un [tutorial de internet](https://www.youtube.com/watch?v=cpz4yt4o7GM)
 
 ## Modo escaneo en la red wifi
 
@@ -71,3 +81,20 @@ si no te activa o funciona la red otra vez puedes reiniciar el NetworkManager co
 `systemctl resert NetworkManager`
 
 de esta forma reiniciaremos el servicio de internet.
+
+
+## desemcriptar
+
+existe una herramienta llamada `aircrack-ng` que nos permitira probar el archivo.cap.
+
+una forma de usarlo es la siguiente.
+
+`aircrack-ng [archivo cap] -w wislist`
+
+### wislist
+
+si no sabes donde estan las wislist o no tiene una puedes encontrar en
+
+``/usr/share/wislist``
+
+o puedes crear la tulla con `crunch [rango min] [rango max] [cadena] -o [donde guardar]`
